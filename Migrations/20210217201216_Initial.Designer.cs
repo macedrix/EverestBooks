@@ -9,7 +9,7 @@ using OnlineBookStore.Models;
 namespace OnlineBookStore.Migrations
 {
     [DbContext(typeof(BookStoreDBContext))]
-    [Migration("20210217032143_Initial")]
+    [Migration("20210217201216_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,6 +33,9 @@ namespace OnlineBookStore.Migrations
 
                     b.Property<string>("AuthorLastName")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AuthorMiddleName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Category")

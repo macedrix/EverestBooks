@@ -42,7 +42,8 @@ namespace OnlineBookStore.Models
                     new Book
                     {
                         Title = "Team of Rivals",
-                        AuthorFirstName = "Doris Kearns",
+                        AuthorFirstName = "Doris",
+                        AuthorMiddleName = "Kearns",
                         AuthorLastName = "Goodwin",
                         Publisher = "Simon and Schuster",
                         ISBN = "978-0743270755",
@@ -66,7 +67,8 @@ namespace OnlineBookStore.Models
                     new Book
                     {
                         Title = "American Ulysses",
-                        AuthorFirstName = "Ronald C.",
+                        AuthorFirstName = "Ronald",
+                        AuthorMiddleName = "C.",
                         AuthorLastName = "White",
                         Publisher = "Random House",
                         ISBN = "978-0812981254",

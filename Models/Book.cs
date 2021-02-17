@@ -14,8 +14,12 @@ namespace OnlineBookStore.Models
         public int BookId { get; set; }
         [Required]
         public string Title { get; set; }
+
+        //Split up the author's name
         [Required]
         public string AuthorFirstName { get; set; }
+        //Not required because some authors don't have a middle name
+        public string AuthorMiddleName { get; set; }
         [Required]
         public string AuthorLastName { get; set; }
         [Required]
