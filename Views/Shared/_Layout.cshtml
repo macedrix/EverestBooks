@@ -7,31 +7,28 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
 </head>
 <body>
-    <header>
-        <!--Navbar-->
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3" style="background-color: #3da4b5">
-            <div class="container">
-                <img src="~/img/mountain.png" style="width:60px"/>
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="font:bold 20px arial, verdana">Everest Books</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <!--New bootstrap command: jumbotron-->
+    <div class="jumbotron text-white" style="background-color: rgba(38, 164, 185, 0.69)">
+        <h1 class="display-3">Everest Books</h1>
+        <p class="lead">The Largest Online Book Store</p>
+        <hr class="my-2">
+        <p>
+            Welcome to Everest Books, the online book store that is even grander (and better) than Amazon
+        </p>
+        <!--New bootstrap command "popover" to create a little popup box to announce that the newletter isn't available-->
+        <p class="lead">
+            <a class="btn btn-info btn-lg" data-toggle="popover" title="Newsletter" data-content="The newsletter is not currently available" style="background-color:#F7941E" href="#!" role="button">Join Our Newsletter</a>
+        </p>
+    </div>
+
     <div class="row m-1 p-1">
-            
         <!--Introduction to Everest Books-->
         <div id="categories" class="col-3">
             <br /><br />
-            Welcome to Everest Books. The greatest and grandest online book store (even bigger than Amazon)! Here, we strive to provide reading materials for all. Whether you are interested in fiction or non-ficiton, or 
+            Welcome to Everest Books. The greatest and grandest online book store (even bigger than Amazon)! Here, we strive to provide reading materials for all. Whether you are interested in fiction or non-ficiton, or
             biographies or self-help books, Everest Books is the right place for you.
         </div>
         <div class="col-9">
@@ -43,5 +40,12 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
+
+    <!--Script tag for popover functionality-->
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover();
+        });
+    </script>
 </body>
 </html>

@@ -56,9 +56,13 @@ namespace OnlineBookStore
 
             app.UseEndpoints(endpoints =>
             {
+                //Add the page number to the url like /P1 or /P2 etc
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    "pagination",
+                    "P{page}",
+                    new { Controller = "Home", action = "Index" });
+
+                endpoints.MapDefaultControllerRoute();
             });
 
             SeedData.EnsurePopulated(app);

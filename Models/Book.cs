@@ -34,6 +34,8 @@ namespace OnlineBookStore.Models
         public string Category { get; set; }
         [Required]
         public double Price { get; set; }
+        [Required]
+        public int NumberOfPages { get; set; }
     }   
 
 }
