@@ -1,0 +1,24 @@
+﻿@model Book
+
+<div class="card card-outline-primary m-1 p-1">
+    <div class="bg-faded p-1">
+        <h4>
+            @Model.Title
+
+            <!--Display the price in the corner of the box-->
+            <span class="badge badge-pill badge-primary" style="float:right; background-color:#F7941E">
+                <small>$@Model.Price</small>
+            </span>
+        </h4>
+        <h6>By @Model.AuthorFirstName @Model.AuthorMiddleName @Model.AuthorLastName</h6>
+    </div>
+    <div class="card-text p-1">
+        Publisher: @Model.Publisher
+        <br />
+        @Model.Classification, @Model.Category
+        <br />
+        ISBN: @Model.ISBN
+        <br />
+        Number of Pages: @Model.NumberOfPages
+    </div>
+</div>

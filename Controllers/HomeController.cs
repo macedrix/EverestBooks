@@ -26,7 +26,7 @@ namespace OnlineBookStore.Controllers
             _repository = repository;
         }
 
-        public IActionResult Index(int page = 1)
+        public IActionResult Index(string category, int page = 1)
         {
             //Send in the repository with the book objects to be displayed
             return View(
@@ -34,6 +34,7 @@ namespace OnlineBookStore.Controllers
              {
                  //Sort the books so that I get the ones for that page
                  Books = _repository.Books
+                .Where(b => category == null || b.Category == category)
                 .OrderBy(p => p.BookId)
                 .Skip((page - 1) * PageSize)
                 .Take(PageSize)
@@ -41,11 +42,14 @@ namespace OnlineBookStore.Controllers
                  //Also send in paging info into the model
                  PagingInfo = new PagingInfo
                  {
+                     //Only show number of pages that match the category searched
                      CurrentPage = page,
                      ItemsPerPage = PageSize,
-                     TotalNumItems = _repository.Books.Count()
-                 }
-             });
+                     TotalNumItems = category == null ? _repository.Books.Count() :
+                     _repository.Books.Where(x => x.Category == category).Count()
+                 },
+                 CurrentCategory = category
+             }) ;
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

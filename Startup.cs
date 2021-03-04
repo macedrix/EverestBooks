@@ -56,12 +56,21 @@ namespace OnlineBookStore
 
             app.UseEndpoints(endpoints =>
             {
-                //Add the page number to the url like /P1 or /P2 etc
-                endpoints.MapControllerRoute(
-                    "pagination",
-                    "P{page}",
+                //If the user gives a category and a page
+                endpoints.MapControllerRoute("categorypage",
+                    "{category}/{page:int}",
                     new { Controller = "Home", action = "Index" });
 
+                //Add the page number to the url like /P1 or /P2 etc
+                endpoints.MapControllerRoute("pagination",
+                    "P{page:int}",
+                    new { Controller = "Home", action = "Index" });
+
+                //If the user only passes in a category
+                endpoints.MapControllerRoute("category",
+                    "{category}",
+                    new { Controller = "Home", action = "Index", page = 1 });
+              
                 endpoints.MapDefaultControllerRoute();
             });
 

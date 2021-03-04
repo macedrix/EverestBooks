@@ -30,7 +30,12 @@ namespace OnlineBookStore.Infrastructure
         public PagingInfo PageModel { get; set; }
         public string PageAction { get; set; }
 
-        //Attributes needed to add custom bootstrap to the pagination
+        //Group properties with a common prefix in the dictionary
+        [HtmlAttributeName(DictionaryAttributePrefix = "page-url-")]
+        public Dictionary<string, object> PageUrlValues { get; set; } = new Dictionary<string, object>();
+
+
+        //Attributes needed to add custom attributes to the pagination
         public bool PageClassesEnabled { get; set; } = false;
         public string PageClass { get; set; }
         public string PageClassNormal { get; set; }
@@ -48,7 +53,10 @@ namespace OnlineBookStore.Infrastructure
             {
                 //Build the tag
                 TagBuilder tag = new TagBuilder("a");
-                tag.Attributes["href"] = urlHelper.Action(PageAction, new { page = i });
+
+                PageUrlValues["page"] = i;
+
+                tag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
 
                 if (PageClassesEnabled)
                 {

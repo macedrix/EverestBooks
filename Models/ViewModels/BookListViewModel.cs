@@ -10,5 +10,6 @@ namespace OnlineBookStore.Models.ViewModels
         //Adds the paging info into the model being sent to the index page
         public IEnumerable<Book> Books { get; set; }
         public PagingInfo PagingInfo { get; set; }
+        public string CurrentCategory { get; set; }
     }
 }
