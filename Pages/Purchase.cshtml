@@ -1,0 +1,64 @@
+﻿@page
+
+@model OnlineBookStore.Pages.PurchaseModel
+
+@{
+}
+
+<!--Only display the table if there is something in the cart-->
+@if (Model.Cart.Lines.Count() > 0)
+{
+    <h2>Your Cart</h2>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Book</th>
+                <th>Quantity</th>
+                <th class="text-right">Price</th>
+                <th>Subtotal</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+            @foreach (var line in Model.Cart.Lines)
+            {
+                <tr>
+                    <td class="text-left">@line.Book.Title</td>
+                    <td class="text-center">@line.Quantity</td>
+                    <td class="text-right">$@line.Book.Price</td>
+                    <td class="text-right">@((line.Quantity * line.Book.Price).ToString("c"))</td>
+                    <td>
+                        <form asp-page="/Purchase" method="post">
+                            <input type="hidden" name="BookId" value="@line.Book.BookId" />
+                            <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                            <input type="hidden" name="actionToPerform" value="removeItem" />
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                Remove
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Total</td>
+                <td class="text-right">@Model.Cart.ComputeTotalSum().ToString("c")</td>
+            </tr>
+        </tfoot>
+
+    </table>
+}
+else
+{
+<div class="alert alert-info text-center" role="alert">
+    <strong>Your cart is currently empty!</strong>
+</div>
+}
+
+<div class="text-center">
+    <a class="btn text-white" style="background-color:#F7941E" href="@Model.ReturnUrl">Continue Shopping</a>
+</div>

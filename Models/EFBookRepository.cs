@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace OnlineBookStore.Models
 {
+    //Inherits from the interface I made
     public class EFBookRepository : IBookRepository
     {
         private BookStoreDBContext _context;

@@ -7,9 +7,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using OnlineBookStore.Models.ViewModels;
+using OnlineBookStore.Infrastructure;
 
 namespace OnlineBookStore.Controllers
 {
+    //Inherits from Controller class
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -26,7 +28,8 @@ namespace OnlineBookStore.Controllers
             _repository = repository;
         }
 
-        public IActionResult Index(string category, int page = 1)
+        //Default view will return Index
+        public IActionResult Index(string category, int pageNum = 1)
         {
             //Send in the repository with the book objects to be displayed
             return View(
@@ -36,19 +39,23 @@ namespace OnlineBookStore.Controllers
                  Books = _repository.Books
                 .Where(b => category == null || b.Category == category)
                 .OrderBy(p => p.BookId)
-                .Skip((page - 1) * PageSize)
+                .Skip((pageNum - 1) * PageSize)
                 .Take(PageSize)
                 ,
                  //Also send in paging info into the model
                  PagingInfo = new PagingInfo
                  {
                      //Only show number of pages that match the category searched
-                     CurrentPage = page,
+                     CurrentPage = pageNum,
                      ItemsPerPage = PageSize,
                      TotalNumItems = category == null ? _repository.Books.Count() :
                      _repository.Books.Where(x => x.Category == category).Count()
                  },
-                 CurrentCategory = category
+
+                 CurrentCategory = category,
+
+                 //Send in the cart as well
+                 Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart(),
              }) ;
         }
 
